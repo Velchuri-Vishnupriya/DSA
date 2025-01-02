@@ -1,2 +1,2 @@
 # DSA
-The codes are written here after reviewing various solutions provided from distingushed coders . 
+The codes are written here after going through the codes of various distingushed coders.
