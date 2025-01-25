@@ -13,7 +13,7 @@ class Solution {
             for(int& v:adj[source]){
                 if(!visited[v]){
                     visited[v]=true;
-                    que.push({v,parent});
+                    que.push({v,source});
                     }
                     else if(v != parent){
                         return true;
