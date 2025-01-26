@@ -1,7 +1,7 @@
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    bool isCycleDFS(vector<vector<int>> adj,int u,vector<bool>& visited){
+    bool isCycleBFS(vector<vector<int>> adj,int u,vector<bool>& visited){
         queue<pair<int,int>> que;
         que.push({u,-1});
         visited[u]=true;
@@ -27,7 +27,7 @@ class Solution {
         int v=adj.size();
          vector<bool> visited(v,false);
          for(int i=0;i<v;i++){
-             if(!visited[i] && isCycleDFS(adj,i,visited)){
+             if(!visited[i] && isCycleBFS(adj,i,visited)){
                  return true;
              }
          }
