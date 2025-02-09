@@ -32,3 +32,25 @@ public:
 return totalpairs-goodpairs;
     }
 };
+
+//Approach-3
+//T.C :O(n)
+//S.C; O(n)
+class Solution {
+public:
+    long long countBadPairs(vector<int>& nums) {
+   long long result=0;
+   int n=nums.size();
+   for(int i=0;i<n;i++){
+    nums[i]=nums[i]-i;
+   } 
+   unordered_map<int,int> mp;
+   mp[nums[0]]=1;
+   for(int j=1;j<n;j++){
+    int countofJ=mp[nums[j]];
+    //j=total pairs frpm 0 to j
+    result+=j-countofJ;
+    mp[nums[j]]++;
+   }
+   return result;}
+};
