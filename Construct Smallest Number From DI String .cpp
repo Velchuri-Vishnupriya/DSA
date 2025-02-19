@@ -46,3 +46,31 @@ public:
      return num;
     }
 };
+
+//using backtracking
+//T.S: O((n+1)! *n )
+//S.C: O(N+10
+bool solve(string& pattern, vector<int>& res, vector<bool>& used, int idx) {
+    if (idx == pattern.size() + 1)  // Base case: all numbers are placed
+        return true;
+
+    for (int num = 1; num <= pattern.size() + 1; num++) {  
+        if (used[num]) continue;  // Skip used numbers
+
+        if (idx == 0 || 
+           (pattern[idx - 1] == 'I' && res[idx - 1] < num) || 
+           (pattern[idx - 1] == 'D' && res[idx - 1] > num)) {
+
+            res[idx] = num;        // Place the number
+            used[num] = true;      // Mark as used
+
+            if (solve(pattern, res, used, idx + 1)) 
+                return true;
+
+            used[num] = false;     // Backtrack
+            res[idx] = 0;          // Reset res[idx]
+        }
+    }
+    return false;
+}
+
