@@ -30,3 +30,34 @@ public:
        return result.substr(16-n,n);
     }
 };
+
+//using backtracking 
+//T.S : O(2^n)
+class Solution {
+public:
+string solve(unordered_set<string> numset,  string& current,int n)
+{
+    if(current.length()==n){
+        if(numset.find(current)==numset.end()) return current;
+        else return "";
+    }
+
+    current+='0';
+    string res=solve(numset,current,n);
+    if(!res.empty()) return res;
+    current.pop_back();
+
+    current+='1';
+     res=solve(numset,current,n);
+    if(!res.empty()) return res;
+    current.pop_back();
+
+    return "";
+
+}    string findDifferentBinaryString(vector<string>& nums) {
+       int n=nums.size();
+       string current;
+       unordered_set<string> numset(begin(nums),end(nums));
+       return solve(numset,current,n);
+    }
+};
