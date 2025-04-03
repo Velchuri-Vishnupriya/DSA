@@ -18,6 +18,25 @@ res=max(res,(long(nums[i] - nums[j]) * nums[k]));
 
 //T.C:O(n)
 //S.C:O(n)
+class Solution {
+public:
+    long long maximumTripletValue(vector<int>& nums) {
+        int n=nums.size();
+      long long res=0;
+vector<int>leftmaxi(n);
+vector<int> rightmaxi(n);
+for(int j=1;j<n;j++){
+    leftmaxi[j]=max(leftmaxi[j-1],nums[j-1]);
+}
+for(int j=n-2;j>=0;j--){
+    rightmaxi[j]=max(rightmaxi[j+1],nums[j+1]);
+}
+
+for(int j=1;j<n;j++){
+    res=max(res,(long long)(leftmaxi[j]-nums[j])*rightmaxi[j]);
+}
+    return res >=0 ? res:0;}
+};
 
 //T.C:O(n)
 //S.C:O(1)
