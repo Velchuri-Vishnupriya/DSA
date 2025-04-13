@@ -1,4 +1,4 @@
-//T.C:(log(b))
+//T.C:(log(n))
 //S.C: O(1)
 class Solution {
 public:
