@@ -3,20 +3,20 @@
 class Solution {
 public:
     int numberOfArrays(vector<int>& diff, int lower, int upper) {
-  int curr = 0 ;
-int max_ele = INT_MIN;
-int min_ele = INT_MAX;
+  long long curr = 0 ;
+long long max_ele = INT_MIN;
+long long min_ele = INT_MAX;
 for (auto& it : diff) {
-    curr += it;
+    curr += (long long)it;
     max_ele = max(curr , max_ele);
     min_ele = min(curr , min_ele);
 }
 // lower <= l <= upper 
 // lower <= l + minval and upper >= 1 + maxval 
 //l >= lower - minval l <= upper - maxval
-int start = max(lower, lower - min_ele);
-int end = min(upper, upper - max_ele);
-return (end - start + 1 > 0 ) ? end - start + 1 : 0;
+long long start = max((long long)lower, (long long)lower - min_ele);
+long long end = min((long long)upper, (long long)upper - max_ele);
+return (end - start + 1 > 0 ) ?(int) end - start + 1 : 0;
 
     }
 };
