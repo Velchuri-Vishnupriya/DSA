@@ -1,62 +1,42 @@
-//Brute Force
-//T.C : O(n^3)
-//S.C : O(1)
+//Brute Force : O(n^3) - ACCEPTED
 class Solution {
 public:
-typedef pair<int,int> P;
-int findEquationValue(P& p1,P& p2,P& p3){
-    int x1 = p1.first;
-    int y1 =  p1.second;
-
-        int x2 = p2.first;
-    int y2 =  p2.second;
-
-    int x3 = p3.first;
-    int y3 =  p3.second;
-
-    return (y3 - y2) * (x2 - x1) - (y2 - y1)*(x3 - x2);
-}
-    vector<vector<int>> outerTrees(vector<vector<int>>& trees) {
-        sort(begin(trees), end(trees));
-
-        vector<vector<int>> result;
-
-        deque<pair<int, int>> upper, lower;
-
-        for(auto point : trees){
+    int maxPoints(vector<vector<int>>& points) {
+        int n = points.size();
+        if(n == 1)
+            return 1;
+        
+        int result = 0;
+        
+        for(int i = 0; i<n; i++) {
             
-            int l = lower.size();
-            int u = upper.size();
-
-while(l >= 2 && findEquationValue(lower[l-2] , lower[l-1], {point[0], point[1[1]}) < 0 ){
-    l--;
-    lower.pop_back(); 
-}
-
-while(l >= 2 && findEquationValue(upper[l-2] , upper[l-1], {point[0], point[1[1]}) > 0 ){
-    u--;
-    upper.pop_back(); 
-}
-
-upper.push_back({point[0],point[1]});
-lower.push_back({point[0],point[1]});
+            for(int j = i+1; j<n; j++) {
+                
+                int count = 2;
+                
+                int dx = points[j][0] - points[i][0];
+                int dy = points[j][1] - points[i][1];
+                
+                for(int k = 0; k < n; k++) {
+                    
+                    if(k != i && k != j) {
+                        int dx_ = points[k][0] - points[i][0];
+                        int dy_ = points[k][1] - points[i][1];
+                        
+                        if(dx_ * dy == dy_ * dx)
+                            count++;
+                    }    
+                }
+                
+                result = max(result, count);
+            }
         }
-
-set<P> st;
-
-for(auto& point : lower){
-    st.insert(point);
-}
-
-for(auto& point : upper){
-    st.upper(point);
-}
-   
-   for(auto& point : st){
-    result.push_back({point.first,point.second});
-} 
-return result;}
+        
+        return result;
+    }
 };
+
+
 
 //Approach -2 - using atan2
 //T.C : O(n^2) 
