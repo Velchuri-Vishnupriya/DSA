@@ -64,4 +64,33 @@ if(i >= nums.size()){
 };
 
 //Approach -3
-//
+//T.C : O(n^2)
+//Bottom - Up Approach
+class Solution {
+public:
+    int maximumLength(vector<int>& nums) {
+      int n = nums.size();
+vector<int> dp (n,1);
+int resultForMod0 = 0;
+int resultForMod1 = 0;
+
+for(int i=1; i<n; i++){
+    for(int j=0; j<i; j++){
+        if((nums[i] + nums[j]) % 2 ==0 ){
+dp[i] = max(dp[i], dp[j]+1);
+resultForMod0 = max(resultForMod0, dp[i]);}
+    }
+}
+
+dp.assign(n,1);
+
+for(int i=1; i<n; i++){
+    for(int j=0; j<i; j++){
+        if((nums[i] + nums[j]) % 2 ==1 ){
+dp[i] = max(dp[i], dp[j]+1);
+resultForMod1 = max(resultForMod1, dp[i]);}
+    }
+}
+   return max(resultForMod0, resultForMod1); 
+   }
+};
