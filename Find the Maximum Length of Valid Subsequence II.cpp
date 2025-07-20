@@ -1,5 +1,5 @@
 //LIS - BOTTOM - UP Approach
-//T.C:O(n^3)
+//T.C:O(n^2)
 class Solution {
 public:
     int maximumLength(vector<int>& nums, int k) {
