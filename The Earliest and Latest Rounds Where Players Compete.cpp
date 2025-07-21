@@ -1,6 +1,6 @@
 //Approach - Recurrsion
-//T.C :O()
-//S.C :O(1)
+//T.C :O(n^2) = T(n) = T(n/2) + n^2
+//S.C :O(1) -> ignoring the logn system stack space
 class Solution {
 public:
     vector<int> earliestAndLatest(int n, int firstPlayer, int secondPlayer) {
