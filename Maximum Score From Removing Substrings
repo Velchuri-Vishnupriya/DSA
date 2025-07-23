@@ -1,0 +1,56 @@
+//T.C : O(n)
+class Solution {
+public:
+    int maximumGain(string s, int x, int y) {
+        string s1 = s;
+        int score = 0;
+        bool yIsGreater = (y > x);
+
+        if (yIsGreater) { // remove "ba" first     O(n)
+            for (int i = 0; i + 1 < s1.length();) {
+                if (s1[i] == 'b' && s1[i + 1] == 'a') {
+                    s1.erase(i, 2);
+                    score += y;
+                    if (i > 0) i--;
+                } else {
+                    i++;
+                }
+            }
+        } else { // remove "ab" first
+            for (int i = 0; i + 1 < s1.length();) {
+                if (s1[i] == 'a' && s1[i + 1] == 'b') {
+                    s1.erase(i, 2);
+                    score += x;
+                    if (i > 0) i--;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        // Second pass
+        if (yIsGreater) { // remove "ab" //O(n)
+            for (int i = 0; i + 1 < s1.length();) {
+                if (s1[i] == 'a' && s1[i + 1] == 'b') {
+                    s1.erase(i, 2);
+                    score += x;
+                    if (i > 0) i--;
+                } else {
+                    i++;
+                }
+            }
+        } else { // remove "ba"
+            for (int i = 0; i + 1 < s1.length();) {
+                if (s1[i] == 'b' && s1[i + 1] == 'a') {
+                    s1.erase(i, 2);
+                    score += y;
+                    if (i > 0) i--;
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        return score;
+    }
+};
