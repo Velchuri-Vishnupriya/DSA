@@ -35,3 +35,54 @@ int cntzeros = 0;
    return (cntzeros > 0) ? result : n-1;
    }
 };
+
+//Sliding Window
+//T.C : O(n)
+class Solution {
+public:
+int n;
+    int longestSubarray(vector<int>& nums) {
+        n = nums.size();
+
+        int result = 0;
+int cntzeros = 0;
+int i = 0;
+        for(int j = 0; j < n; j++){
+            if(nums[j] == 0){
+                cntzeros++;
+            }
+            while(cntzeros > 1){
+                if(nums[i] == 0) cntzeros--;
+                i++;
+            }
+        result = max(result, j - i);
+        }
+
+   return result;
+   }
+};
+
+//Sliding Window - modified version 
+//T.C : O(n)
+class Solution {
+public:
+int n;
+    int longestSubarray(vector<int>& nums) {
+        n = nums.size();
+
+        int result = 0;
+        int last_idx_zero = -1;
+        int i = 0;
+
+        for(int j = 0; j < n; j++){
+            if(nums[j] == 0)
+            {
+        i = last_idx_zero + 1;
+        last_idx_zero = j;
+            }
+        result = max(result, j - i);
+        }
+        
+return result;
+   }
+};
