@@ -21,7 +21,7 @@ int solve(vector<vector<int>>& triangle, int row, int col){
     }
 };
 
-//Approach -1  Bottom - Up
+//Approach -2  Bottom - Up
 //T.C: O(n^2)
 //S.C: O(n^2)
 class Solution {
@@ -37,5 +37,44 @@ public:
         }
       }
    return t[0][0];
+    }
+};
+
+//Approach -3  Bottom - Up - optimized
+//T.C: O(n^2)
+//S.C: O(n)
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+      int n = triangle.size();
+      vector<int> t = triangle[n-1]; //space = O(n)
+
+      for(int row = n-2; row>=0; row--){
+        for(int col=0; col<=row; col++){
+            t[col] = triangle[row][col] + min(t[col], t[col+1]);
+        }
+      }
+   return t[0];
+    }
+};
+
+//Approach -4  Bottom - Up - optimized
+//T.C: O(n^2)
+//S.C: O(n)
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+      int n = triangle.size();
+     
+      for(int row = 1; row < n; row++){
+        for(int col=0; col <= row; col++){
+            triangle[row][col] = triangle[row][col] + 
+            min(
+                triangle[row-1][max(col-1,0)], 
+                triangle[row-1][min(col,row-1)]
+                );
+        }
+      }
+   return *min_element(triangle[n-1].begin(), triangle[n-1].end());
     }
 };
