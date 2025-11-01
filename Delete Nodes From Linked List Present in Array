@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+ //T.C : O(n) n=listnode head size
+ //S.C :  O(num_size)
+class Solution {
+public:
+    ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+
+        // Put nums into a set for fast lookup
+        unordered_set<int> st(nums.begin(), nums.end());
+
+        vector<int> vec;
+        ListNode* temp = head;
+
+        // Store only values NOT in nums
+        while(temp != NULL) {
+            if(st.find(temp->val) == st.end()) {
+                vec.push_back(temp->val);
+            }
+            temp = temp->next;
+        }
+
+        // If no elements remain
+        if(vec.size() == 0) {
+            return NULL;
+        }
+
+        // Build new linked list using vector
+        ListNode* newHead = new ListNode(vec[0]);
+        ListNode* curr = newHead;
+
+        for(int i = 1; i < vec.size(); i++) {
+            curr->next = new ListNode(vec[i]);
+            curr = curr->next;
+        }
+
+        curr->next = NULL;
+        return newHead;
+    }
+};
