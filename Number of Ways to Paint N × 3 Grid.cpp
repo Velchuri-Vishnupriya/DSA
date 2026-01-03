@@ -19,3 +19,54 @@ public:
        return (int)(dpA + dpB) % MOD;
     }
 };
+
+// T.C : O(n*12*12*3)
+// S.C : O(n)
+
+class Solution {
+public:
+int M = 1e9 + 7;
+vector<vector<int>>t;
+//12 possible first rows
+vector<string> states = {"RYG","RYR","RGY","RGR","YRG","YGR","YGY","YRY","GRY","GRG","GYG","GYR"};
+
+ int solve(int n, int prev){
+    if(n == 0)return 1;
+
+    if(t[n][prev] != -1) return t[n][prev];
+
+    string prevRow = states[prev];
+    
+    int result = 0;
+
+    for(int curr = 0; curr < 12; curr++){
+        if(states[curr] == prevRow) continue;
+
+        bool color = true;
+        string currRow = states[curr];
+
+        for(int i = 0; i < 3; i++){
+            if(currRow[i] == prevRow[i]){
+                color = false;
+                break;
+            }
+        }
+
+        if(color == true){
+            result = (result + solve(n-1,curr)) % M;
+        }
+    }
+ return t[n][prev] = result;
+ }
+    int numOfWays(int n) {
+        int result = 0;
+        t.resize(n, vector<int>(12, -1));
+
+        for(int i = 0; i < 12; i++){//choosing first row
+        //n-1 remaining
+        result = (result + solve(n-1,i)) % M;
+        }
+
+        return result;
+    }
+};
