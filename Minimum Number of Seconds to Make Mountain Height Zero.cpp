@@ -20,7 +20,7 @@ long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) {
 
     long long l = 1;
 
-    long long minWorker = *max_element(workerTimes.begin(), workerTimes.end());
+    long long minWorker = *min_element(workerTimes.begin(), workerTimes.end());
 
     long long r = minWorker * 1LL * mountainHeight * (mountainHeight+1) / 2;
 
