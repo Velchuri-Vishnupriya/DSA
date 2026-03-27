@@ -1,0 +1,24 @@
+//T.C : O(m*n)
+//s.C : O(1)
+class Solution {
+public:
+    bool areSimilar(vector<vector<int>>& mat, int k) {       int m = mat.size();
+        int n = mat[0].size();
+        k = (k % n);
+        if(k == 0)return true;
+       
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+               int originalVal = mat[i][j];
+               if(i % 2 == 0){
+                int newVal = mat[i][(j + k) % n]; 
+                if(newVal != originalVal)return false;
+               }else{
+         int newVal = mat[i][(j - k + n) % n];
+                if(newVal != originalVal)return false;
+               }
+            }
+        }
+        return true;
+    }
+};
